@@ -12,7 +12,8 @@ This project demonstrates basic state management with React Hooks and provides a
 - ✅ Mark tasks as completed or pending  
 - 🔄 Reset or clear the list when needed  
 - 🎨 Styled with custom CSS for a polished UI  
-
+**photo**
+  ![Todo App Screenshot](./public/ScreenShot.png)
 ---
 
 ## 📦 Tech Stack
