@@ -15,6 +15,60 @@
     margin-bottom: 20px;
     color: #333;
   }
+  .button-group {
+    display: flex;
+    gap: 10px; /* space between buttons */
+  }
+  
+/* Edit input styling */
+.todo-item input[type="text"] {
+  padding: 6px 10px;
+  font-size: 14px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  margin-right: 8px;
+  outline: none;
+  transition: border-color 0.3s ease;
+}
+
+.todo-item input[type="text"]:focus {
+  border-color: #0078d7; /* highlight on focus */
+}
+
+/* Save button styling */
+.save-btn {
+  background-color: #28a745; /* green */
+  color: white;
+  border: none;
+  padding: 6px 12px;
+  font-size: 14px;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.save-btn:hover {
+  background-color: #218838; /* darker green on hover */
+}
+
+
+  .edit-btn {
+    background-color: #ffc107;
+    border: none;
+    padding: 6px 12px;
+    cursor: pointer;
+    border-radius: 4px;
+  }
+  
+  .delete-btn {
+    background-color: #dc3545;
+    border: none;
+    padding: 6px 12px;
+    cursor: pointer;
+    border-radius: 4px;
+    color: white;
+  }
+  
   
   /* Input + Button */
   .todo-input {
