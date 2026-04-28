@@ -1,25 +1,109 @@
+/* Animated background for the whole page */
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background: linear-gradient(-45deg, #ff9a9e, #fad0c4, #fbc2eb, #a6c1ee);
+  background-size: 400% 400%;
+  animation: gradientBG 12s ease infinite;
+}
+
+/* Gradient animation keyframes */
+@keyframes gradientBG {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
 /* Container */
 .todo-container {
-    max-width: 400px;
-    margin: 40px auto;
-    padding: 20px;
-    background: #f9f9f9;
-    border-radius: 8px;
-    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
-    text-align: center;
-    font-family: Arial, sans-serif;
-  }
-  
-  /* Heading */
-  .todo-container h2 {
-    margin-bottom: 20px;
-    color: #333;
-  }
-  .button-group {
-    display: flex;
-    gap: 10px; /* space between buttons */
-  }
-  
+  max-width: 400px;
+  margin: 40px auto;
+  padding: 20px;
+  background: rgba(249, 249, 249, 0.9); /* semi-transparent for glass effect */
+  border-radius: 12px;
+  box-shadow: 0 6px 12px rgba(0,0,0,0.15);
+  text-align: center;
+  backdrop-filter: blur(6px); /* glassmorphism */
+}
+
+/* Heading */
+.todo-container h2 {
+  margin-bottom: 20px;
+  color: #333;
+}
+
+/* Input + Button */
+.todo-input {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 20px;
+}
+
+.todo-input input {
+  flex: 1;
+  padding: 8px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+.todo-input input:focus {
+  border-color: #0078d7;
+  outline: none;
+}
+
+.todo-input button {
+  padding: 8px 12px;
+  background: #4caf50;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+
+.todo-input button:hover {
+  background: #45a049;
+}
+
+/* Todo List */
+.todo-list {
+  list-style: none;
+  padding: 0;
+}
+
+.todo-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: #fff;
+  margin-bottom: 10px;
+  padding: 8px 12px;
+  border-radius: 6px;
+  border: 1px solid #ddd;
+  transition: transform 0.2s ease;
+}
+
+.todo-item:hover {
+  transform: scale(1.02);
+}
+
+.todo-item span {
+  flex: 1;
+  text-align: left;
+}
+
+/* Button group */
+.button-group {
+  display: flex;
+  gap: 10px;
+}
+
 /* Edit input styling */
 .todo-item input[type="text"] {
   padding: 6px 10px;
@@ -32,12 +116,12 @@
 }
 
 .todo-item input[type="text"]:focus {
-  border-color: #0078d7; /* highlight on focus */
+  border-color: #0078d7;
 }
 
 /* Save button styling */
 .save-btn {
-  background-color: #28a745; /* green */
+  background-color: #28a745;
   color: white;
   border: none;
   padding: 6px 12px;
@@ -48,88 +132,34 @@
 }
 
 .save-btn:hover {
-  background-color: #218838; /* darker green on hover */
+  background-color: #218838;
 }
 
+/* Edit button styling */
+.edit-btn {
+  background-color: #ffc107;
+  border: none;
+  padding: 6px 12px;
+  cursor: pointer;
+  border-radius: 4px;
+  transition: background-color 0.3s ease;
+}
 
-  .edit-btn {
-    background-color: #ffc107;
-    border: none;
-    padding: 6px 12px;
-    cursor: pointer;
-    border-radius: 4px;
-  }
-  
-  .delete-btn {
-    background-color: #dc3545;
-    border: none;
-    padding: 6px 12px;
-    cursor: pointer;
-    border-radius: 4px;
-    color: white;
-  }
-  
-  
-  /* Input + Button */
-  .todo-input {
-    display: flex;
-    gap: 10px;
-    margin-bottom: 20px;
-  }
-  
-  .todo-input input {
-    flex: 1;
-    padding: 8px;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-  }
-  
-  .todo-input button {
-    padding: 8px 12px;
-    background: #4caf50;
-    color: white;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-  }
-  
-  .todo-input button:hover {
-    background: #45a049;
-  }
-  
-  /* Todo List */
-  .todo-list {
-    list-style: none;
-    padding: 0;
-  }
-  
-  .todo-item {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    background: #fff;
-    margin-bottom: 10px;
-    padding: 8px 12px;
-    border-radius: 4px;
-    border: 1px solid #ddd;
-  }
-  
-  .todo-item span {
-    flex: 1;
-    text-align: left;
-  }
-  
-  /* Delete Button */
-  .delete-btn {
-    background: #e74c3c;
-    border: none;
-    color: white;
-    padding: 6px 10px;
-    border-radius: 4px;
-    cursor: pointer;
-  }
-  
-  .delete-btn:hover {
-    background: #c0392b;
-  }
-  
+.edit-btn:hover {
+  background-color: #e0a800;
+}
+
+/* Delete button styling */
+.delete-btn {
+  background-color: #dc3545;
+  border: none;
+  padding: 6px 12px;
+  cursor: pointer;
+  border-radius: 4px;
+  color: white;
+  transition: background-color 0.3s ease;
+}
+
+.delete-btn:hover {
+  background-color: #c0392b;
+}
