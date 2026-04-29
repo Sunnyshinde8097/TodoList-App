@@ -4,9 +4,10 @@ import "./TodoApp.css";
 function TodoApp() {
   const [todos, setTodos] = useState([]);
   const [input, setInput] = useState("");
-  const [file, setFile] = useState(null); // track uploaded file
+  const [file, setFile] = useState(null);
   const [isEditing, setIsEditing] = useState(null);
   const [editText, setEditText] = useState("");
+  const [editFile, setEditFile] = useState(null);
 
   const addTodo = () => {
     if (input.trim() === "") return;
@@ -22,15 +23,17 @@ function TodoApp() {
   const startEdit = (index) => {
     setIsEditing(index);
     setEditText(todos[index].text);
+    setEditFile(todos[index].file);
   };
 
   const saveEdit = (index) => {
     const updatedTodos = todos.map((todo, i) =>
-      i === index ? { ...todo, text: editText } : todo
+      i === index ? { ...todo, text: editText, file: editFile } : todo
     );
     setTodos(updatedTodos);
     setIsEditing(null);
     setEditText("");
+    setEditFile(null);
   };
 
   return (
@@ -60,6 +63,10 @@ function TodoApp() {
                   type="text"
                   value={editText}
                   onChange={(e) => setEditText(e.target.value)}
+                />
+                <input
+                  type="file"
+                  onChange={(e) => setEditFile(e.target.files[0])}
                 />
                 <button className="save-btn" onClick={() => saveEdit(index)}>
                   💾 Save
