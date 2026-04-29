@@ -1,31 +1,32 @@
 import React, { useState } from "react";
-import "./TodoApp.css"; // Import CSS file
+import "./TodoApp.css";
 
 function TodoApp() {
   const [todos, setTodos] = useState([]);
   const [input, setInput] = useState("");
-  const [isEditing, setIsEditing] = useState(null); // track index being edited
-  const [editText, setEditText] = useState("");     // track edit input value
+  const [file, setFile] = useState(null); // track uploaded file
+  const [isEditing, setIsEditing] = useState(null);
+  const [editText, setEditText] = useState("");
 
   const addTodo = () => {
     if (input.trim() === "") return;
-    setTodos([...todos, input]);
+    setTodos([...todos, { text: input, file }]);
     setInput("");
+    setFile(null);
   };
 
   const removeTodo = (index) => {
-    const newTodos = todos.filter((_, i) => i !== index);
-    setTodos(newTodos);
+    setTodos(todos.filter((_, i) => i !== index));
   };
 
   const startEdit = (index) => {
     setIsEditing(index);
-    setEditText(todos[index]);
+    setEditText(todos[index].text);
   };
 
   const saveEdit = (index) => {
     const updatedTodos = todos.map((todo, i) =>
-      i === index ? editText : todo
+      i === index ? { ...todo, text: editText } : todo
     );
     setTodos(updatedTodos);
     setIsEditing(null);
@@ -41,11 +42,11 @@ function TodoApp() {
           value={input}
           onChange={(e) => setInput(e.target.value)}
           placeholder="Enter a task..."
-          onKeyDown={(e) => {
-            if (e.key === "Enter") {
-              addTodo();
-            }
-          }}
+          onKeyDown={(e) => e.key === "Enter" && addTodo()}
+        />
+        <input
+          type="file"
+          onChange={(e) => setFile(e.target.files[0])}
         />
         <button onClick={addTodo}>Add</button>
       </div>
@@ -66,13 +67,34 @@ function TodoApp() {
               </>
             ) : (
               <>
-                <span>{todo}</span>
-                 <div className="button-group"> 
-                 <button className="edit-btn" onClick={() => startEdit(index)}>
-                   ✏️ Edit </button>
-                    <button className="delete-btn" onClick={() => removeTodo(index)}> 
-                    ❌ Delete </button>
-                 </div>
+                <span>{todo.text}</span>
+                {todo.file && (
+                  <div className="file-preview">
+                    {todo.file.type.startsWith("image/") ? (
+                      <img
+                        src={URL.createObjectURL(todo.file)}
+                        alt="preview"
+                        className="preview-img"
+                      />
+                    ) : (
+                      <a
+                        href={URL.createObjectURL(todo.file)}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                      >
+                        📎 {todo.file.name}
+                      </a>
+                    )}
+                  </div>
+                )}
+                <div className="button-group">
+                  <button className="edit-btn" onClick={() => startEdit(index)}>
+                    ✏️ Edit
+                  </button>
+                  <button className="delete-btn" onClick={() => removeTodo(index)}>
+                    ❌ Delete
+                  </button>
+                </div>
               </>
             )}
           </li>
